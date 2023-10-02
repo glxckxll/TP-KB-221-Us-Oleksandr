@@ -1,9 +1,7 @@
 import math
-
 def solve_quadratic_equation(a, b, c):
     # Обчислюємо дискримінант
     discriminant = b**2 - 4*a*c
-
     # Перевіряємо значення дискримінанту
     if discriminant > 0:
         # Два корені
@@ -11,13 +9,13 @@ def solve_quadratic_equation(a, b, c):
         root2 = (-b - math.sqrt(discriminant)) / (2*a)
         return root1, root2
     elif discriminant == 0:
-        # Один корінь (корінь кратності 2)
+        # Один корінь 
         root = -b / (2*a)
         return root
     else:
-        # Дискримінант від'ємний, розв'язків немає у множині дійсних чисел
+        # Розв'язків немає 
         return "Розв'язків немає"
-
+    
 # Введення коефіцієнтів квадратного рівняння від користувача
 a = float(input("Введіть коефіцієнт a: "))
 b = float(input("Введіть коефіцієнт b: "))
