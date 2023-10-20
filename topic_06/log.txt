@@ -1,0 +1,4 @@
+2023-10-20 21:15:46.013584: numbers: a = 7.0, b = 7.0; operation = 7; result = Error: unknown operation
+2023-10-20 21:16:17.825438: numbers: a = 3.0, b = 2.0; operation = -; result = 1.0
+2023-10-20 21:16:27.215907: numbers: a = 2.0, b = 1.0; operation = /; result = 2.0
+2023-10-20 21:16:37.854471: numbers: a = 77.0, b = 45.0; operation = qwerty; result = Error: unknown operation
