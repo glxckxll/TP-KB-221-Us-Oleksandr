@@ -23,44 +23,34 @@ def div(x, y):
     return x / y
 
 def calculator(a, b, operation):
-
     if operation == "+":
-        return sum(a,b)
+        return sum(a, b)
     elif operation == "-":
-        return min(a,b)
+        return min(a, b)
     elif operation == "*":
-        return mult(a,b)
+        return mult(a, b)
     elif operation == "/":
-        return div(a,b)
+        return div(a, b)
     else:
-        return "Помилка"
+        raise ValueError("Непідтримувана операція")
 
 def main():
-    a = get_number("Число a: ")
-    b = get_number("Число b: ")
-    operation = input("Операція (+, -, *, /): ")
-
-    try:
-        result = calculator(a, b, operation)
-    except ZeroDivisionError as e:
-        print(e)
-    else:
-        print(f"Результат: {result}")
-
     while True:
-        answer = input("Бажаєте продовжити? (так/ні): ")
-        if answer == "так":
+        try:
             a = get_number("Число a: ")
             b = get_number("Число b: ")
             operation = input("Операція (+, -, *, /): ")
 
-            try:
-                result = calculator(a, b, operation)
-            except ZeroDivisionError as e:
-                print(e)
-            else:
-                print(f"Результат: {result}")
-        else:
+            if operation not in ['+', '-', '*', '/']:
+                raise ValueError("Невірна операція")
+
+            result = calculator(a, b, operation)
+            print(f"Результат: {result}")
+        except (ValueError, ZeroDivisionError) as e:
+            print(e)
+
+        answer = input("Бажаєте продовжити? (так/ні): ")
+        if answer != "так":
             break
 
 if __name__ == "__main__":
