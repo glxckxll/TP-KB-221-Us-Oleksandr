@@ -1,99 +1,100 @@
-# Список студентів
 list = [
-    {"name": "Борис", "phone": "0633894436", "email": "borik@example.com", "group": "KB-221"},
-    {"name": "Степан", "phone": "0947384727", "email": "stepan@example.com", "group": "KB-221"},
-    {"name": "Петро", "phone": "0634329354", "email": "petro@example.com", "group": "KB-222"},
-    {"name": "Олександр", "phone": "0639283964", "email": "sasshko@example.com", "group": "KB-221"},
-    {"name": "Сергій", "phone": "069030283", "email": "serhii@example.com", "group": "KB-222"},
+    {"name":"Вадим", "age":"24", "course":"2", "phone":"380975128898"},
+    {"name":"Данило","age":"19", "course":"1","phone":"380710994999"},
+    {"name":"Захар","age":"22", "course":"3", "phone":"380710994998"},
+    {"name":"Іван","age":"21", "course":"2", "phone":"380508380180"},
+    {"name":"Матвій","age":"26", "course":"4", "phone":"380954146429"},
+    {"name":"Павло","age":"26", "course":"1", "phone":"380974104357"},
+    {"name":"Тарас","age":"25", "course":"2", "phone":"380632541982"}
 ]
 
-# Функція для виведення списку студентів
 def printAllList():
-    # Перебір усіх елементів списку
     for elem in list:
-        # Форматування
-        strForPrint = f"Student name is {elem['name']}, Phone is {elem['phone']}, Email is {elem['email']}, Group is {elem['group']}"
+        strForPrint = "Student name is " + elem["name"] + ", age is " + elem["age"] + ", course is " + elem["course"] + ", phone is " + elem["phone"]
         print(strForPrint)
+    return
 
-# Функція для додавання нового студента
+
 def addNewElement():
-    name = input("Please enter student name: ")
+    name = input("Pease enter student name: ")
     phone = input("Please enter student phone: ")
-    email = input("Please enter student email: ")
-    group = input("Please enter student group: ")
-
-    # Створення нового елементу
-    newItem = {"name": name, "phone": phone, "email": email, "group": group}
-
+    age = input("Please enter student age: ")
+    course = input("Please enter student course: ")
+    
+    newItem = {"name": name, "age" : age, "course": course, "phone": phone}
+    # find insert position
     insertPosition = 0
-    # Перебір усіх елементів списку для визначення позиції
     for item in list:
         if name > item["name"]:
             insertPosition += 1
         else:
             break
 
-    # Вставка нового елемента у список
     list.insert(insertPosition, newItem)
     print("New element has been added")
+    return
 
-# Функція для видалення студента
+
 def deleteElement():
-    # Введення імені студента для видалення
-    name = input("Please enter name to be deleted: ")
+    name = input("Please enter name to be delated: ")
     deletePosition = -1
     for item in list:
         if name == item["name"]:
             deletePosition = list.index(item)
             break
+
     if deletePosition == -1:
         print("Element was not found")
     else:
+        print("Delete position", str(deletePosition))
         del list[deletePosition]
-        print("Element has been deleted")
+    return
 
-# Функція для оновлення даних студента
+
 def updateElement():
-    # Введення імені
     name = input("Please enter name to be updated: ")
+    found = False
 
-    # Перебір усіх елементів списку для пошуку студента
-    for student in list:
-        if name == student["name"]:
-            phone = input("Please enter new phone: ")
-            email = input("Please enter new email: ")
-            group = input("Please enter new group: ")
+    for index, item in enumerate(list):
+        if item["name"] == name:
+            found = True
+            update_field = input("Enter the field to update (name, age, course, phone): ")
+            new_value = input("Enter the new value: ")
+            list[index][update_field] = new_value
+            print("Element updated successfully")
+            break
 
-            # Оновлення даних студента
-            student["phone"] = phone
-            student["email"] = email
-            student["group"] = group
-
-            print("Element has been updated")
-            return
-    print("Element not found")
+    if not found:
+        print("Element with such name was not found")
 
 def main():
     while True:
-        chouse = input("Please specify the action [ C create, U update, D delete, P print,  X exit ] ")
+        chouse = input(
+            "Please specify the action [ C create, U update, D delete, P print, X exit ] "
+        )
         match chouse:
             case "C" | "c":
                 print("New element will be created:")
                 addNewElement()
                 printAllList()
             case "U" | "u":
+                print("Existing element will be updated")
                 updateElement()
                 printAllList()
             case "D" | "d":
+                print("Element will be deleted")
                 deleteElement()
                 printAllList()
             case "P" | "p":
+                print("List will be printed")
                 printAllList()
             case "X" | "x":
                 print("Exit()")
                 break
             case _:
                 print("Wrong chouse")
+                main()
 
 
-main()
+if __name__ == "__main__":
+    main()
